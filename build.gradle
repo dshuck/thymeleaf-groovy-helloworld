@@ -1,13 +1,17 @@
 buildscript {
     repositories {
-        maven { url "http://repo.spring.io/libs-release" }
+        maven { url "http://localhost:8081/artifactory/plugins-release" }
         mavenLocal()
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.5.RELEASE")
+        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '2.0.9')
     }
 }
+
+
+
+
 
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
@@ -20,9 +24,10 @@ jar {
 }
 
 repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url "http://repo.spring.io/libs-release" }
+    //mavenLocal()
+    //mavenCentral()
+    //maven { url "http://localhost:8081/artifactory/repo" }
+    maven { url "http://artifactory.bnsf.com:8081/artifactory/repo" }
 }
 
 dependencies {
@@ -30,7 +35,8 @@ dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.3.2'
     compile "org.springframework.boot:spring-boot-starter-web:1.0.2.RELEASE"
     compile "org.springframework.boot:spring-boot:1.0.2.RELEASE"
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+    compile "org.springframework.data:spring-data-couchbase:1.1.4.RELEASE"
     testCompile("junit:junit")
 }
 
